@@ -11,6 +11,9 @@
     // see https://developers.cloudflare.com/workers/configuration/compatibility-flags/#global-fetch-strictly-public
     "global_fetch_strictly_public",
   ],
+  "observability": {
+    "enabled": true,
+  },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS",
@@ -33,7 +36,8 @@
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "payload-events","preview_bucket_name": "payload-events",
+      "bucket_name": "payload-events",
+      "preview_bucket_name": "payload-events",
     },
     // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
     // {
