@@ -69,6 +69,11 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    events: Event;
+    venues: Venue;
+    organizers: Organizer;
+    offers: Offer;
+    performers: Performer;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +83,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    venues: VenuesSelect<false> | VenuesSelect<true>;
+    organizers: OrganizersSelect<false> | OrganizersSelect<true>;
+    offers: OffersSelect<false> | OffersSelect<true>;
+    performers: PerformersSelect<false> | PerformersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -159,6 +169,110 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  startDate: string;
+  endDate: string;
+  eventStatus?:
+    | ('EventScheduled' | 'EventCancelled' | 'EventMovedOnline' | 'EventPostponed' | 'EventRescheduled')
+    | null;
+  attendanceMode?: ('OfflineEventAttendanceMode' | 'OnlineEventAttendanceMode' | 'MixedEventAttendanceMode') | null;
+  images?: (number | Media)[] | null;
+  venue: number | Venue;
+  organizer: number | Organizer;
+  offers?: (number | Offer)[] | null;
+  performers?: (number | Performer)[] | null;
+  additionalInfo?: {
+    ageRestriction?: string | null;
+    dressCode?: string | null;
+    parking?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "venues".
+ */
+export interface Venue {
+  id: number;
+  name: string;
+  address: {
+    streetAddress: string;
+    locality: string;
+    region: string;
+    postalCode: string;
+    country: string;
+  };
+  geo?: {
+    latitude?: number | null;
+    longitude?: number | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "organizers".
+ */
+export interface Organizer {
+  id: number;
+  name: string;
+  url?: string | null;
+  contact?: {
+    email?: string | null;
+    telephone?: string | null;
+    contactType?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers".
+ */
+export interface Offer {
+  id: number;
+  name: string;
+  price: number;
+  currency?: string | null;
+  availability?: ('InStock' | 'SoldOut' | 'PreOrder') | null;
+  validFrom?: string | null;
+  url?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "performers".
+ */
+export interface Performer {
+  id: number;
+  name: string;
+  type?: ('Person' | 'Organization') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -188,6 +302,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'venues';
+        value: number | Venue;
+      } | null)
+    | ({
+        relationTo: 'organizers';
+        value: number | Organizer;
+      } | null)
+    | ({
+        relationTo: 'offers';
+        value: number | Offer;
+      } | null)
+    | ({
+        relationTo: 'performers';
+        value: number | Performer;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -268,6 +402,97 @@ export interface MediaSelect<T extends boolean = true> {
   filesize?: T;
   width?: T;
   height?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  startDate?: T;
+  endDate?: T;
+  eventStatus?: T;
+  attendanceMode?: T;
+  images?: T;
+  venue?: T;
+  organizer?: T;
+  offers?: T;
+  performers?: T;
+  additionalInfo?:
+    | T
+    | {
+        ageRestriction?: T;
+        dressCode?: T;
+        parking?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "venues_select".
+ */
+export interface VenuesSelect<T extends boolean = true> {
+  name?: T;
+  address?:
+    | T
+    | {
+        streetAddress?: T;
+        locality?: T;
+        region?: T;
+        postalCode?: T;
+        country?: T;
+      };
+  geo?:
+    | T
+    | {
+        latitude?: T;
+        longitude?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "organizers_select".
+ */
+export interface OrganizersSelect<T extends boolean = true> {
+  name?: T;
+  url?: T;
+  contact?:
+    | T
+    | {
+        email?: T;
+        telephone?: T;
+        contactType?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers_select".
+ */
+export interface OffersSelect<T extends boolean = true> {
+  name?: T;
+  price?: T;
+  currency?: T;
+  availability?: T;
+  validFrom?: T;
+  url?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "performers_select".
+ */
+export interface PerformersSelect<T extends boolean = true> {
+  name?: T;
+  type?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

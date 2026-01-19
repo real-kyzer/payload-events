@@ -10,6 +10,11 @@ import { r2Storage } from '@payloadcms/storage-r2'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Events } from './collections/Events'
+import { Venues } from './collections/Venues'
+import { Organizers } from './collections/Organizers'
+import { Offers } from './collections/Offers'
+import { Performers } from './collections/Performers'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,8 +34,14 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
+      // Feel free to delete this at any time. Simply remove the line below.
+      beforeDashboard: ['@/components/BeforeDashboard'],
+    },
   },
-  collections: [Users, Media],
+
+  collections: [Users, Media, Events, Venues, Organizers, Offers, Performers],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
