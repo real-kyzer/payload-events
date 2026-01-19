@@ -47,7 +47,7 @@ export default async function EventsPage() {
             >
               {/* Image */}
               {hero && (
-                <Image
+                <img
                   src={hero.url}
                   alt={hero.alt || event.title}
                   width={400}

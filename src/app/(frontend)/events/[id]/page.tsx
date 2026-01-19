@@ -39,7 +39,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
       {/* Hero Image */}
       {doc.images?.[0] && typeof doc.images[0] === 'object' && (
         <div style={{ marginBottom: '2rem' }}>
-          <Image
+          <img
             src={doc.images[0].url}
             alt={doc.images[0].alt || doc.title}
             width={1200}
