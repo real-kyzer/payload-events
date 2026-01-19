@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 
+export const dynamic = 'force-dynamic'
+
 export default async function VenuePage({ params }: { params: Promise<{ id: string }> }) {
   const payload = await getPayload({ config })
 

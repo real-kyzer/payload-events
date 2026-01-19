@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import payloadConfig from '@/payload.config'
 
+export const dynamic = 'force-dynamic'
+
 export default async function EventPage({ params }: { params: Promise<{ id: string }> }) {
   const payload = await getPayload({ config: payloadConfig })
 
