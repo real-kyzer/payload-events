@@ -56,9 +56,10 @@ export default async function EventPage({
       },
     },
     depth: 3,
+    limit: 1
   });
 
-  const doc = event.docs[0];
+  const doc = event.docs.length > 1 ? event.docs[0] : event.docs;
 
   if (!doc) {
     return <div>Event not found</div>;

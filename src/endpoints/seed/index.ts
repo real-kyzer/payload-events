@@ -50,31 +50,32 @@ export const seed = async ({
   // ----------------------------------------
   payload.logger.info(`— Seeding media...`)
 
-  const mediaURLs = [
-    // Outdoor cinema
-    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d',
+const mediaURLs = [
+  // Outdoor cinema
+  'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=2400&h=1350&fit=crop',
 
-    // Night market / food stalls
-    'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0',
+  // Night market / food stalls
+  'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=2400&h=1350&fit=crop',
 
-    // Live music / jazz night
-    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4',
+  // Live music / jazz night
+  'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=2400&h=1350&fit=crop',
 
-    // Art gallery / exhibition
-    'https://images.unsplash.com/photo-1529101091764-c3526daf38fe',
+  // Art gallery / exhibition
+  'https://images.unsplash.com/photo-1529101091764-c3526daf38fe?w=2400&h=1350&fit=crop',
 
-    // Light festival / city lights
-    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
+  // Light festival / city lights
+  'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=2400&h=1350&fit=crop',
 
-    // Garden / outdoor event
-    'https://images.unsplash.com/photo-1501004318641-b39e6451bec6',
+  // Garden / outdoor event
+  'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=2400&h=1350&fit=crop',
 
-    // Crowd at event / festival
-    'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf',
+  // Crowd at event / festival
+  'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?w=2400&h=1350&fit=crop',
 
-    // Street performers / laneway vibe
-    'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91',
-  ]
+  // Street performers / laneway vibe
+  'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=2400&h=1350&fit=crop',
+];
+
 
   const mediaBuffers = await Promise.all(mediaURLs.map(fetchFileByURL))
 
