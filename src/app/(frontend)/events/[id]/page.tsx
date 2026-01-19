@@ -3,15 +3,17 @@ import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import payloadConfig from '@/payload.config'
 
-export default async function EventPage({ params }: { params: { id: number } }) {
+export default async function EventPage({ params }: { params: Promise<{ id: string }> }) {
   const payload = await getPayload({ config: payloadConfig })
+
+  const { id } = await params
 
   // Fetch the event by slug (or change to id if needed)
   const event = await payload.find({
     collection: 'events',
     where: {
       id: {
-        equals: params.id,
+        equals: id,
       },
     },
     depth: 3,

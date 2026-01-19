@@ -1,5 +1,3 @@
-import type { LexicalValue } from '@payloadcms/richtext-lexical'
-
 import type { Payload, PayloadRequest, CollectionSlug, File } from 'payload'
 
 const collections: CollectionSlug[] = [
@@ -246,7 +244,7 @@ export const seed = async ({
   // ----------------------------------------
   payload.logger.info(`— Seeding events...`)
 
-  const richText = (text: string): LexicalValue => ({
+  const richText = (text: string): any => ({
     root: {
       type: 'root',
       version: 1,

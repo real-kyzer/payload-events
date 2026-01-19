@@ -3,13 +3,15 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 
-export default async function VenuePage({ params }: { params: { id: string } }) {
+export default async function VenuePage({ params }: { params: Promise<{ id: string }> }) {
   const payload = await getPayload({ config })
+
+  const { id } = await params
 
   // Fetch the venue itself
   const venue = await payload.findByID({
     collection: 'venues',
-    id: params.id,
+    id: id,
   })
 
   // Fetch all events that reference this venue
@@ -17,7 +19,7 @@ export default async function VenuePage({ params }: { params: { id: string } }) 
     collection: 'events',
     where: {
       venue: {
-        equals: params.id,
+        equals: id,
       },
     },
     depth: 2,
