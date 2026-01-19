@@ -876,7 +876,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
                 </svg>
                 About This Event
               </h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: 'black' }}>
                 <RichText data={doc.description} />
               </div>
             </div>
