@@ -15,6 +15,7 @@ export default async function VenuesPage() {
 
   return (
     <main style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem' }}>
+      <Link href={'/'}>Home</Link>
       <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>Venues</h1>
 
       <div

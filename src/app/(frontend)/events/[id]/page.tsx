@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import payloadConfig from '@/payload.config'
+import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
 
@@ -33,7 +34,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
 
   return (
     <main style={{ maxWidth: 800, margin: '0 auto', padding: '2rem' }}>
-      {/* Title */}
+      <Link href={'/'}>Home</Link>
       <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{doc.title}</h1>
 
       {/* Hero Image */}

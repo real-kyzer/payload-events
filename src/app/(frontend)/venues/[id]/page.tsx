@@ -30,6 +30,7 @@ export default async function VenuePage({ params }: { params: Promise<{ id: stri
 
   return (
     <main style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem' }}>
+      <Link href={'/'}>Home</Link>
       <h1 style={{ fontSize: '2.5rem', marginBottom: '2rem' }}>{venue.name}</h1>
 
       {events.docs.length === 0 && <p style={{ color: '#444' }}>No events found for this venue.</p>}
@@ -63,7 +64,7 @@ export default async function VenuePage({ params }: { params: Promise<{ id: stri
             >
               {/* Image */}
               {hero && (
-                <Image
+                <img
                   src={hero.url}
                   alt={hero.alt || event.title}
                   width={400}
