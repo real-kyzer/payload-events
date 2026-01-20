@@ -1,9 +1,12 @@
+import Image from 'next/image'
 import { getPayload } from 'payload'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import payloadConfig from '@/payload.config'
 import Link from 'next/link'
 import { Media, Offer, Performer, Venue } from '@/payload-types'
 import React, { cache } from 'react'
+import { MenuComp } from './_menu'
+import { HeroComp } from './_hero'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -78,6 +81,8 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
     return <div>Event not found</div>
   }
 
+  const venue = doc.venue as Venue
+
   const image = doc.images?.[0]
 
   const media = image && typeof image === 'object' ? image : null
@@ -103,6 +108,12 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
           'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
       }}
     >
+      <MenuComp />
+      <HeroComp doc={doc} />
+      <div style={{ marginBlock: '3rem', marginInline: 'auto', maxWidth: '65ch' }}>
+        <RichText data={doc.description} />
+      </div>
+
       {/* Hero Section - Eventure Style */}
       <div
         style={{
@@ -115,19 +126,30 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
       >
         {/* Background Image */}
         {heroImage && (
-          <div
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              // backgroundImage: `linear-gradient(180deg, rgba(98, 51, 239, 0.8), rgba(98, 51, 239, 0.8)), url(${media?.url || null})`,
-              backgroundImage: `linear-gradient(180deg, rgba(25 43 100 / 80%), rgba(25 43 100 / 80%)), url(${media?.url || null})`,
-              backgroundPosition: '0px 0px, 50% 50%',
-              backgroundSize: 'auto, cover',
-              backgroundRepeat: 'repeat, no-repeat',
-            }}
-          />
+          // <div
+          //   style={{
+          //     position: 'absolute',
+          //     width: '100%',
+          //     height: '100%',
+          //     objectFit: 'cover',
+          //     // backgroundImage: `linear-gradient(180deg, rgba(98, 51, 239, 0.8), rgba(98, 51, 239, 0.8)), url(${media?.url || null})`,
+          //     backgroundImage: `linear-gradient(180deg, rgba(25 43 100 / 80%), rgba(25 43 100 / 80%)), url(${media?.url || null})`,
+          //     backgroundPosition: '0px 0px, 50% 50%',
+          //     backgroundSize: 'auto, cover',
+          //     backgroundRepeat: 'repeat, no-repeat',
+          //   }}
+          // />
+          <div style={{ position: 'absolute', inset: 0 }}>
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(180deg, rgba(25 43 100 / 80%), rgba(25 43 100 / 80%))',
+                zIndex: 2,
+              }}
+            />
+            <Image src={media?.url || ''} alt="" fill style={{ objectFit: 'cover' }} priority />
+          </div>
         )}
 
         {/* Purple Overlay */}

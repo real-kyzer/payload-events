@@ -1,6 +1,7 @@
 import config from '@/payload.config'
 import Link from 'next/link'
 import { getPayload } from 'payload'
+import Image from 'next/image'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -51,7 +52,7 @@ export default async function EventsPage() {
             >
               {/* Image */}
               {hero && (
-                <img
+                <Image
                   src={hero.url}
                   alt={hero.alt || event.title}
                   width={400}
