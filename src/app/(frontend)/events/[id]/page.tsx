@@ -110,7 +110,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
     >
       <MenuComp />
       <HeroComp doc={doc} />
-      <div style={{ marginBlock: '3rem', marginInline: 'auto', maxWidth: '65ch' }}>
+      <div style={{ marginBlock: '3rem', marginInline: 'auto', maxWidth: '65ch', padding: '1rem' }}>
         <RichText data={doc.description} />
       </div>
 
