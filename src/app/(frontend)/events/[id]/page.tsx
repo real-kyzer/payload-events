@@ -4,7 +4,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 import payloadConfig from "@/payload.config";
 import Link from "next/link";
 import { Divider } from "@payloadcms/ui/elements/Popup/PopupButtonList";
-import { Offer, Performer, Venue } from "@/payload-types";
+import { Media, Offer, Performer, Venue } from "@/payload-types";
 
 export const dynamic = "force-dynamic";
 
@@ -923,7 +923,7 @@ export default async function EventPage({
               </div>
             </div>
 
-            {doc.images?.map((image) => (
+            {(doc.images as Media[])?.map((image) => (
               <img
                 key={image.id}
                 src={image.url}
