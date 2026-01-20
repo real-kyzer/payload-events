@@ -924,7 +924,7 @@ export default async function EventPage({
               </div>
             </div>
 
-            {doc.images.map(image => <img src={image.url} style={{maxWidth: "100%"}} />)}
+            {doc.images?.map((image) => ( <img key={image.id} src={image.url} alt={image.alt || ""} style={{ maxWidth: "100%" }} /> ))}
 
             {/* Performers */}
             {doc.performers && doc.performers.length > 0 && (
