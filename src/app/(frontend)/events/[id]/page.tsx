@@ -949,12 +949,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
             </div>
 
             {(doc.images as Media[])?.map((image) => (
-              <img
-                key={image.id}
-                src={image.url}
-                alt={image.alt || ''}
-                style={{ maxWidth: '100%' }}
-              />
+        <Image key={image.id} src={media?.url || ''} alt={image.alt || ''} fill style={{ objectFit: 'cover' }} priority />
             ))}
 
             {/* Performers */}
