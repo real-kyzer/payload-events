@@ -1,5 +1,5 @@
-import fs from 'node:fs'
-import path from 'node:path'
+import fs from 'fs'
+import path from 'path'
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
@@ -7,7 +7,6 @@ import { fileURLToPath } from 'url'
 import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
 import { r2Storage } from '@payloadcms/storage-r2'
-import * as process from 'node:process'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -22,9 +21,7 @@ const dirname = path.dirname(filename)
 const realpath = (value: string) => (fs.existsSync(value) ? fs.realpathSync(value) : undefined)
 
 const isCLI = process.argv.some((value) => realpath(value).endsWith(path.join('payload', 'bin.js')))
-console.log('🚀 ~ isCLI:', isCLI)
 const isProduction = process.env.NODE_ENV === 'production'
-console.log('🚀 ~ process.env.NODE_ENV:', process.env.NODE_ENV)
 
 const cloudflare =
   isCLI || !isProduction
