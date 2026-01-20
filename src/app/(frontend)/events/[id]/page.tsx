@@ -71,7 +71,7 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
   // });
 
   // const doc = event.docs[0];
-  const doc = queryEventsById({ id })
+  const doc = await queryEventsById({ id })
 
   if (!doc) {
     return <div>Event not found</div>
