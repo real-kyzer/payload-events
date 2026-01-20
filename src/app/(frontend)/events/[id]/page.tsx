@@ -56,10 +56,9 @@ export default async function EventPage({
       },
     },
     depth: 3,
-    limit: 1
   });
 
-  const doc = event.docs.length > 1 ? event.docs[0] : event.docs;
+  const doc = event.docs[0];
 
   if (!doc) {
     return <div>Event not found</div>;
@@ -924,7 +923,14 @@ export default async function EventPage({
               </div>
             </div>
 
-            {doc.images?.map((image) => ( <img key={image.id} src={image.url} alt={image.alt || ""} style={{ maxWidth: "100%" }} /> ))}
+            {doc.images?.map((image) => (
+              <img
+                key={image.id}
+                src={image.url}
+                alt={image.alt || ""}
+                style={{ maxWidth: "100%" }}
+              />
+            ))}
 
             {/* Performers */}
             {doc.performers && doc.performers.length > 0 && (
