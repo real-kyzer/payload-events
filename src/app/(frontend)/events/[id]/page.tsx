@@ -1,9 +1,7 @@
 import { getPayload } from "payload";
-import Image from "next/image";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import payloadConfig from "@/payload.config";
 import Link from "next/link";
-import { Divider } from "@payloadcms/ui/elements/Popup/PopupButtonList";
 import { Media, Offer, Performer, Venue } from "@/payload-types";
 
 export const dynamic = "force-dynamic";
