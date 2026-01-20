@@ -24,9 +24,10 @@ const isCLI = false //process.argv.some((value) => realpath(value).endsWith(path
 const isProduction = process.env.NODE_ENV === 'production'
 
 const cloudflare =
-  isCLI || !isProduction
-    ? await getCloudflareContextFromWrangler()
-    : await getCloudflareContext({ async: true })
+  // isCLI || !isProduction
+  // ? await getCloudflareContextFromWrangler()
+  // :
+  await getCloudflareContext({ async: true })
 
 export default buildConfig({
   admin: {
