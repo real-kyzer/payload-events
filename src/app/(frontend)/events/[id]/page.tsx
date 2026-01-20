@@ -948,11 +948,18 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
               </div>
             </div>
 
-            <div style={{position: 'relative', minHeight: '200px'}}>
-            {(doc.images as Media[])?.map((image) => (
-        <Image key={image.id} src={media?.url || ''} alt={image.alt || ''} style={{ objectFit: 'cover', maxWidth: '100%', width: 'auto' }} priority />
-            ))}
-              </div>
+            <div style={{ position: 'relative', minHeight: '200px' }}>
+              {(doc.images as Media[])?.map((image) => (
+                <Image
+                  key={image.id}
+                  src={media?.url || ''}
+                  alt={image.alt || ''}
+                  fill
+                  style={{ objectFit: 'cover', maxWidth: '100%' }}
+                  priority
+                />
+              ))}
+            </div>
 
             {/* Performers */}
             {doc.performers && doc.performers.length > 0 && (
