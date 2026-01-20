@@ -3,6 +3,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 import payloadConfig from "@/payload.config";
 import Link from "next/link";
 import { Media, Offer, Performer, Venue } from "@/payload-types";
+import React, { cache } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -36,17 +37,10 @@ function formatCurrency(amount: number, currency: string) {
   }).format(amount);
 }
 
-export default async function EventPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+const queryEventsById = cache(async ({ id }: { id: string }) => {
   const payload = await getPayload({ config: payloadConfig });
 
-  const { id } = await params;
-
-  // Fetch the event by slug (or change to id if needed)
-  const event = await payload.find({
+  const result = await payload.find({
     collection: "events",
     where: {
       id: {
@@ -54,9 +48,34 @@ export default async function EventPage({
       },
     },
     depth: 3,
+    limit: 1,
   });
 
-  const doc = event.docs[0];
+  return result.docs?.[0] || null;
+});
+
+export default async function EventPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  // const payload = await getPayload({ config: payloadConfig });
+
+  const { id } = await params;
+
+  // Fetch the event by slug (or change to id if needed)
+  // const event = await payload.find({
+  //   collection: "events",
+  //   where: {
+  //     id: {
+  //       equals: id,
+  //     },
+  //   },
+  //   depth: 3,
+  // });
+
+  // const doc = event.docs[0];
+  const doc = queryEventsById(id);
 
   if (!doc) {
     return <div>Event not found</div>;
