@@ -1,18 +1,34 @@
+import payloadConfig from '@/payload.config'
 import Link from 'next/link'
-import Image from 'next/image'
 import { getPayload } from 'payload'
-import config from '@/payload.config'
+import { cache } from 'react'
 
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-static'
+export const revalidate = 600
 
-export default async function EventsPage() {
-  const payload = await getPayload({ config })
+const queryEventsById = cache(async () => {
+  const payload = await getPayload({ config: payloadConfig })
 
-  const events = await payload.find({
+  const result = await payload.find({
     collection: 'events',
     depth: 2,
     limit: 100,
   })
+
+  return result || null
+})
+
+export default async function EventsPage() {
+  // const payload = await getPayload({ config })
+
+  // const events = await payload.find({
+  //   collection: 'events',
+  //   depth: 2,
+  //   limit: 100,
+  // })
+
+  // const doc = event.docs[0];
+  const events = await queryEventsById()
 
   return (
     <main style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem' }}>
