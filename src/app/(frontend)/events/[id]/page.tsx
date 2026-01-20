@@ -5,8 +5,6 @@ import Link from 'next/link'
 import { Media, Offer, Performer, Venue } from '@/payload-types'
 import React, { cache } from 'react'
 
-export const dynamic = 'force-dynamic'
-
 const formatDate = (date: Date) => {
   return date.toLocaleDateString('en-AU', {
     weekday: 'long',
