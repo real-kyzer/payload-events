@@ -125,6 +125,9 @@ svg {
       text-decoration: none;
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
+      color: rgb(1000, 1000, 1000);
+      background: #192b64;
+      border: 1px solid rgb(1000, 1000, 1000);
     }
 
     .admin {
