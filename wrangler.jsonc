@@ -12,7 +12,13 @@
     "global_fetch_strictly_public",
   ],
   "observability": {
-    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+    },
+    "traces": {
+      "enabled": false,
+    },
   },
   "assets": {
     "directory": ".open-next/assets",
@@ -48,10 +54,6 @@
   "images": {
     "binding": "IMAGES",
   },
-  "vars": {
-    "BUN_VERSION": "1.3.6",
-  },
-
   // Here's how to configure an additional environment
   // It can be deployed with `CLOUDFLARE_ENV=staging pnpm run deploy`
   // "env": {
